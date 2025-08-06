@@ -1,0 +1,17 @@
+`timescale 1ns/1ps
+module tb_lfsr_8bit;
+    reg clk, reset;
+    wire [7:0] out;
+
+    lfsr_8bit uut(clk, reset, out);
+    always #5 clk = ~clk;
+
+    initial begin
+        $dumpfile("lfsr.vcd"); $dumpvars(0, tb_lfsr_8bit);
+        clk = 0; reset = 1; #10;
+        reset = 0;
+        #200;
+        $finish;
+    end
+endmodule
+
